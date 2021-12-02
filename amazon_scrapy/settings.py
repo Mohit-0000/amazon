@@ -34,6 +34,34 @@ DOWNLOAD_DELAY = 5
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
 
+
+ROTATING_PROXY_LIST = [
+    "37.120.192.154:8080",
+    "159.65.69.186:9300",
+    "116.107.232.63:4002",
+    "23.107.176.65:32180",
+    "209.141.55.228:80",
+    "206.253.164.122:80",
+    "24.165.144.126:8080",
+    "144.217.75.65:8800",
+    "58.26.138.168:80",
+    "139.99.237.62:80",
+    "201.249.161.51:999",
+    "185.227.153.3:59394",
+    "58.26.138.171:80",
+    "95.111.225.137:443",
+    "209.141.56.127:80",
+    "103.105.49.53:80",
+    "47.74.152.29:8888",
+    "206.253.164.28:80",
+    "103.124.2.229:3128",
+    "129.226.113.45:59394",
+    "194.233.69.90:443",
+    "206.189.30.235:80",
+    "74.141.186.101:80",
+    "88.198.24.108:8080",
+    # ...
+]
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
@@ -59,7 +87,37 @@ COOKIES_ENABLED = False
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
     'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+    'rotating_proxies.middlewares.RotatingProxyMiddleware': 800,
+    'rotating_proxies.middlewares.BanDetectionMiddleware': 800,
 }
+
+USER_AGENTS = [
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/57.0.2987.110 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/61.0.3163.79 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:55.0) '
+     'Gecko/20100101 '
+     'Firefox/55.0'),  # firefox
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/61.0.3163.91 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/62.0.3202.89 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/63.0.3239.108 '
+     'Safari/537.36'),  # chrome
+]
+
+
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
