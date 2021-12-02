@@ -18,7 +18,7 @@ class AmazonSpider(scrapy.Spider):
 
     def parse(self,response):
         for sel in response.xpath('//*[@class="a-section a-spacing-medium a-text-center"]'):
-            time.sleep(5)
+            time.sleep(2)
             item = AmazonScrapyItem()
 
             item['brand'] = sel.xpath('.//*[@class="s-line-clamp-1"]//text()').extract_first()
