@@ -18,7 +18,7 @@ class AmazonSpider(scrapy.Spider):
 
     def parse(self,response):
         for sel in response.xpath('//*[@class="a-section a-spacing-medium a-text-center"]'):
-            time.sleep(2)
+            # time.sleep(2)
             item = AmazonScrapyItem()
 
             item['brand'] = sel.xpath('.//*[@class="s-line-clamp-1"]//text()').extract_first()
@@ -30,6 +30,11 @@ class AmazonSpider(scrapy.Spider):
             yield item
         next_urls = response.css("li.a-last a::attr(href)").extract()
         for next_url in next_urls:
-            if next_url:
-                yield scrapy.Request(response.urljoin(next_url), callback=self.parse)
-            raise CloseSpider(reason="The end")
+            print("NEXT__URL__CHECK@@-->",next_url)
+            if next_url is not None:
+                url="https://www.amazon.in"+(next_url)
+                print("CHECK__NEW__NEXT@@-->",url)
+                yield scrapy.Request(response.urljoin(url), callback=self.parse)
+            else:
+                print("FINAL_NEXT_URL-->",next_url)
+                raise CloseSpider(reason="The end")
